@@ -1,0 +1,139 @@
+local ESP = Window:CreateTab("ESP", 4483362458)
+local Auto = Window:CreateTab("Auto", 4483362458)
+local Entity = Window:CreateTab("Entity", 4483362458)
+
+-- KEY ESP
+ESP:CreateButton({
+Name="🔑 Key ESP",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="KeyObtain" then
+Instance.new("Highlight",v)
+end
+end
+end})
+
+-- LEVER ESP
+ESP:CreateButton({
+Name="🎛 Lever ESP",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="LeverForGate" then
+Instance.new("Highlight",v)
+end
+end
+end})
+
+-- GOLD ESP
+ESP:CreateButton({
+Name="🪙 Gold ESP",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="GoldPile" then
+Instance.new("Highlight",v)
+end
+end
+end})
+
+-- DOOR ESP
+ESP:CreateButton({
+Name="🚪 Door ESP",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="Door" then
+Instance.new("Highlight",v)
+end
+end
+end})
+
+-- ENTITY ESP
+ESP:CreateButton({
+Name="👁 Entity ESP",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="RushMoving" or v.Name=="AmbushMoving" then
+Instance.new("Highlight",v)
+end
+end
+end})
+
+-- AUTO DOOR
+Auto:CreateButton({
+Name="🚪 Auto Door",
+Callback=function()
+while task.wait() do
+for _,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+if v.Name=="Door" then
+fireproximityprompt(v:FindFirstChildOfClass("ProximityPrompt"))
+end
+end
+end
+end})
+
+-- AUTO GOLD
+Auto:CreateButton({
+Name="🪙 Auto Gold",
+Callback=function()
+while task.wait() do
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="GoldPile" then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v,0)
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v,1)
+end
+end
+end
+end})
+
+-- ITEM AURA
+Auto:CreateButton({
+Name="🧲 Item Aura",
+Callback=function()
+while task.wait() do
+for _,v in pairs(workspace:GetDescendants()) do
+if v:IsA("Tool") then
+v.Handle.CFrame=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+end
+end})
+
+-- GOD MODE
+Entity:CreateButton({
+Name="🛡 God Mode",
+Callback=function()
+local char=game.Players.LocalPlayer.Character
+char.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
+end})
+
+-- ANTI SCREECH
+Entity:CreateButton({
+Name="👁 Anti Screech",
+Callback=function()
+for _,v in pairs(workspace:GetDescendants()) do
+if v.Name=="Screech" then
+v:Destroy()
+end
+end
+end})
+
+-- ANTI RUSH
+Entity:CreateButton({
+Name="🚫 Anti Rush",
+Callback=function()
+workspace.ChildAdded:Connect(function(v)
+if v.Name=="RushMoving" then
+v:Destroy()
+end
+end)
+end})
+
+-- ANTI AMBUSH
+Entity:CreateButton({
+Name="🚫 Anti Ambush",
+Callback=function()
+workspace.ChildAdded:Connect(function(v)
+if v.Name=="AmbushMoving" then
+v:Destroy()
+end
+end)
+end})
